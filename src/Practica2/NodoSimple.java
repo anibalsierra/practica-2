@@ -14,19 +14,19 @@ public class NodoSimple {
         this.liga = null;
     }
 
-    public Object asignaDato() {
+    public Object retornaDato() {
         return dato;
     }
 
-    public NodoSimple asignaLiga() {
+    public NodoSimple retornaLiga() {
         return liga;
     }
 
-    public void retornaDato(Object dato) {
+    public void asignaDato(Object dato) {
         this.dato = dato;
     }
 
-    public void retornaLiga(NodoSimple liga) {
+    public void asignaLiga(NodoSimple liga) {
         this.liga = liga;
     }
 
