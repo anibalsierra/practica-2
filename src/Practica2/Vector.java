@@ -19,33 +19,33 @@ public class Vector {
     }
     public int retornaNumeroElementos(){
     }
-    void asignaNumeroElementos(int n){
+    public void asignaNumeroElementos(int n){
     }
-    Object retornaDatoEn(int i){
+    public Object retornaDatoEn(int i){
     }
-    void asignaDato(Object d, int i){
+    public void asignaDato(Object d, int i){
     }
-    void muestraDatos(){        
+    public void muestraDatos(){        
     }
-    boolean esVacio(){
+    public boolean esVacio(){
     }
-    boolean esLleno(){
+    public boolean esLleno(){
     }
-    int retornaPosicionDato(Object d){
+    public int retornaPosicionDato(Object d){
     }
-    void ordenaAscendente(){
+    public void ordenaAscendente(){
     }
-    void ordenaDescendente(){
+    public void ordenaDescendente(){
     }
-    void agregar(Object d){
+    public void agregar(Object d){
     }
-    int buscaDondeInsertar(Object d){
+    public int buscaDondeInsertar(Object d){
     }
-    void inserta(Object d, int i){
+    public void inserta(Object d, int i){
     }
-    void inserta(Object d){
+    public void inserta(Object d){
     }
-    void borraDatoEn(int i){
+    public void borraDatoEn(int i){
     }
     
 }
