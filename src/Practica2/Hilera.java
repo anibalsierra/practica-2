@@ -10,4 +10,19 @@ package Practica2;
  */
 public class Hilera {
     
+    public int longitud(){
+    }
+    public Hilera subHilera(int i, int j){
+    }
+    public Hilera concat(Hilera s){
+    }
+    public void inserta(Hilera s, int j){
+    }
+    public void borra(int i, int j){
+    }
+    public void replace(int i, int j, Hilera s){
+    }
+    public int posicion(Hilera s){
+    } 
+    
 }
