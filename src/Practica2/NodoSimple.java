@@ -4,7 +4,7 @@ package Practica2;
  *
  * @author wil
  */
-public class NodoSimple {
+public class NodoSimple implements NodoGod {
 
     private Object dato;
     private NodoSimple liga;
@@ -13,21 +13,24 @@ public class NodoSimple {
         this.dato = dato;
         this.liga = null;
     }
-
+    
+    @Override
     public Object retornaDato() {
         return dato;
     }
-
+    @Override
     public NodoSimple retornaLiga() {
         return liga;
     }
-
+    @Override
     public void asignaDato(Object dato) {
         this.dato = dato;
+    }    
+   @Override
+    public void asignaLiga(NodoGod liga) {
+        this.liga = (NodoSimple)liga;
     }
-
-    public void asignaLiga(NodoSimple liga) {
-        this.liga = liga;
-    }
+    
+    
 
 }

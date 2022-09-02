@@ -4,37 +4,45 @@ package Practica2;
  *
  * @author wil
  */
-public class LSL {
+public class LSL implements ListaGod {
 
-    private NodoSimple primero, ultimo;
+    private NodoSimple primero; 
+    private NodoSimple ultimo;
 
     public LSL() {
         primero = ultimo = null;
     }
 
+    @Override
     public boolean esVacia() {
         return primero == null;
     }
-
-    public NodoSimple primerNodo() {
+    @Override
+    public NodoGod primerNodo() {
         return primero;
     }
-
-    public NodoSimple ultimoNodo() {
+    @Override
+    public NodoGod ultimoNodo() {
         return ultimo;
+    }    
+    @Override
+    public NodoGod anterior(NodoGod x) {
+        NodoGod p,y;
+        p = primerNodo();
+        y = null;
+        while(!p.equals(x)){
+            y = p;
+            p = p.retornaLiga();
+        }
+        return y;           
     }
-
-    public NodoSimple anterior(NodoSimple x) {
-        //no creo que sea asi analizar
-        return x.retornaLiga();
-    }
-
-    public boolean finDeRecorrido(NodoSimple x) {
+    @Override
+    public boolean finDeRecorrido(NodoGod x) {
         return x == null;
     }
-
+    @Override
     public void recorre() {
-        NodoSimple p;
+        NodoGod p;
         p = primerNodo();
         while (!finDeRecorrido(p)) {
             //aqui va la logica, el print es probable que se cambien 
@@ -45,55 +53,58 @@ public class LSL {
         }
 
     }
-
-    public NodoSimple buscaDondeInsertar(Object d) {
-        NodoSimple p, y;
+    @Override
+    public NodoGod buscaDondeInsertar(Object d) {
+        NodoGod p, y;
         p = primerNodo();
         y = anterior(p);
         // la comparacion de objetos se debe efectuar de otra manera
-        while (!finDeRecorrido(p) && p.retornaDato() < d) {
+        String datoP = (String)p.retornaDato();
+        String datoD = (String)d;
+        while (!finDeRecorrido(p) && (datoP.compareToIgnoreCase(datoD) < 0)) {
             y = p;
             p = p.retornaLiga();
         }
+        return y;
     }
-
     //Object
-    public void insertar(Object d, NodoSimple y) {
-        NodoSimple x;
+    @Override
+    public void insertar(Object d, NodoGod y) {
+        NodoGod x;
         x = new NodoSimple(d);
         conectar(x, y);
     }
-
-    public void conectar(NodoSimple x, NodoSimple y) {
+    @Override
+    public void conectar(NodoGod x, NodoGod y) {
         if (y != null) {
             x.asignaLiga(y.retornaLiga());
             y.asignaLiga(x);
-            if (y == ultimo) {
-                ultimo = x;
+            if (y.equals((NodoGod)ultimo)) {
+                ultimo = (NodoSimple)x;
 
             } else {
                 x.asignaLiga(primero);
                 if (primero == null) {
-                    ultimo = x;
+                    ultimo = (NodoSimple)x;
                 }
-                primero = x;
+                primero = (NodoSimple)x;
             }
 
         }
     }
-
-    public NodoSimple buscarDato(Object d, NodoSimple y) {
-        NodoSimple x;
+    @Override
+    public NodoGod buscarDato(Object d, NodoGod y) {
+        NodoGod x;
         x = primerNodo();
         y = anterior(x);
-        while (!finDeRecorrido(x) && x.retornaDato() != d) {
+        while (!finDeRecorrido(x) && !(x.retornaDato().equals(d))) {
             y = x;
             x = x.retornaLiga();
         }
         return x;
     }
-
-    public void borrar(NodoSimple x, NodoSimple y) {
+    @Override
+    public void borrar(NodoGod x, NodoGod y) {
         if (x == null) {
             //sout no va se debe cambiar
             System.out.println("dato no existe");
@@ -101,12 +112,12 @@ public class LSL {
         }
         desconectar(x, y);
     }
-
-    public void desconectar(NodoSimple x, NodoSimple y) {
-        if (x != primero) {
+    @Override
+    public void desconectar(NodoGod x, NodoGod y) {
+        if (!x.equals((NodoGod)primero)) {
             y.asignaLiga(x.retornaLiga());
-            if (x == ultimo) {
-                ultimo = y;
+            if (x.equals((NodoGod)ultimo)) {
+                ultimo = (NodoSimple)y;
             } else {
                 primero = primero.retornaLiga();
                 if (primero == null) {
@@ -115,26 +126,28 @@ public class LSL {
             }
         }
     }
-
+    @Override
     public void ordenarAscendentemente() {
-        NodoSimple p, ap, menor, amenor, q, aq;
+        NodoGod p, ap, menor, amenor, q, aq;
         p = primerNodo();
         ap = anterior(p);
-        while (p != ultimoNodo()) {
+        while (!p.equals(ultimoNodo())) {
             menor = p;
             amenor = ap;
             q = p.retornaLiga();
             aq = p;
             while (!finDeRecorrido(q)) {
                 // la comparacion no es correcta corregir
-                if (q.retornaDato() < menor.retornaDato()) {
+                String datoQ = (String)q.retornaDato();
+                String datoMenor = (String)menor.retornaDato();
+                if (datoQ.compareToIgnoreCase(datoMenor) < 0) {
                     menor = q;
                     amenor = aq;
                 }
                 aq = q;
                 q = q.retornaLiga();
             }
-            if (menor == p) {
+            if (menor.equals(p)) {
                 ap = p;
                 p = p.retornaLiga();
             } else {
