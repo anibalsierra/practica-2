@@ -2,7 +2,7 @@ package Practica2;
 
 /**
  *
- * @author beto_
+ * @author wil
  */
 public class NodoSimple {
 
