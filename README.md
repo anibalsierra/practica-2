@@ -1,2 +1,2 @@
 # practica-2
-robert-god
+robert-good
