@@ -23,6 +23,5 @@ public class Hilera {
     public void replace(int i, int j, Hilera s){
     }
     public int posicion(Hilera s){
-    } 
-    
+    }     
 }

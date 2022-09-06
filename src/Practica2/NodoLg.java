@@ -8,29 +8,34 @@ package Practica2;
  *
  * @author beto_
  */
-public class NodoSimple implements NodoGod {
-
+public class NodoLg  {
+    
     private Object dato;
     private NodoSimple liga;
+    private int sw;
 
-    public NodoSimple(Object dato) {
+    public NodoLg(Object dato) {
         this.dato = dato;
         this.liga = null;
-    }    
-    @Override
+        this.sw = 0;
+    }
     public Object retornaDato() {
         return dato;
     }
-    @Override
     public NodoSimple retornaLiga() {
         return liga;
     }
-    @Override
+    public int retornaSw(){
+        return sw;
+    }
+    public void asignaSw(int sw){
+        this.sw = sw;
+    }
     public void asignaDato(Object dato) {
         this.dato = dato;
-    }    
-   @Override
-    public void asignaLiga(NodoGod liga) {
-        this.liga = (NodoSimple)liga;
     }
+    public void asignaLiga(NodoSimple liga) {
+        this.liga = liga;
+    }
+    
 }

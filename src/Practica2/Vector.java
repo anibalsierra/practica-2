@@ -13,7 +13,10 @@ public class Vector {
     private Object v[];
     private int n;
     
-    public Vector(int n){        
+    public Vector(int m){
+        this.n = m + 1;
+        this.v = new Object[n];
+        this.v[0]=0; 
     }
     public int retornaCapacidad(){
     }
@@ -47,5 +50,6 @@ public class Vector {
     }
     public void borraDatoEn(int i){
     }
-    
+    private void intercambia(int i, int k){
+    }    
 }

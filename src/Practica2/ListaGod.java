@@ -1,11 +1,14 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
 package Practica2;
 
 /**
  *
- * @author wilmar.osorio1
+ * @author beto_
  */
 public interface ListaGod {
-
     public boolean esVacia();
     public NodoGod primerNodo();
     public NodoGod ultimoNodo();
@@ -19,5 +22,4 @@ public interface ListaGod {
     public void borrar(NodoGod x, NodoGod y);
     public void desconectar(NodoGod x, NodoGod y);
     public void ordenarAscendentemente();
-
 }

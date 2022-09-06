@@ -1,8 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Practica2;
 
 /**
  *
- * @author wil
+ * @author beto_
  */
 public class LSL implements ListaGod {
 
@@ -12,7 +16,6 @@ public class LSL implements ListaGod {
     public LSL() {
         primero = ultimo = null;
     }
-
     @Override
     public boolean esVacia() {
         return primero == null;
@@ -51,7 +54,6 @@ public class LSL implements ListaGod {
             }
             p = p.retornaLiga();
         }
-
     }
     @Override
     public NodoGod buscaDondeInsertar(Object d) {
@@ -158,5 +160,7 @@ public class LSL implements ListaGod {
         }
 
     }
-
 }
+
+    
+
