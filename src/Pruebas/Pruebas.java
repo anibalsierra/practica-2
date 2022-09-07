@@ -33,6 +33,7 @@ public class Pruebas {
         nS1 = new NodoSimple("d");
         nS2 = new NodoSimple("a");
         nLG1 = new NodoLg("1993");
+        NodoLg nLG2 = new NodoLg(null);
         s1="a";
         s2="1992";
         dato = nS2;
@@ -45,7 +46,9 @@ public class Pruebas {
         System.out.println(sw);
         System.out.println(nS1.retornaDato());
         System.out.println(nLG1.retornaDato());
-        
+        System.out.println(nLG1.retornaSw());
+        nLG1 = new NodoLg(nLG2);
+        System.out.println(nLG1.retornaSw());        
         //función comparar un dato con otro
         //a negative integer, zero, or a positive integer as the specified 
         //String is greater than, equal to, or less than this String, ignoring case considerations.
