@@ -22,7 +22,7 @@ public class NodoSimple implements NodoGod {
         return dato;
     }
     @Override
-    public NodoSimple retornaLiga() {
+    public NodoGod retornaLiga() {
         return liga;
     }
     @Override

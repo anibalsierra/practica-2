@@ -121,7 +121,7 @@ public class LSL implements ListaGod {
             if (x.equals((NodoGod)ultimo)) {
                 ultimo = (NodoSimple)y;
             } else {
-                primero = primero.retornaLiga();
+                primero = (NodoSimple)primero.retornaLiga();
                 if (primero == null) {
                     ultimo = null;
                 }
