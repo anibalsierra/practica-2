@@ -10,6 +10,7 @@ package Pruebas;
  */
 import Practica2.*;
 import java.util.Stack;
+import java.math.*;
 
 
 public class Pruebas {    
@@ -17,10 +18,29 @@ public class Pruebas {
     /**
      * @param args the command line arguments
      */
+    public static void stormArrowDmg(){
+        for(int i = 0; i<= 9; i++){
+            System.out.println(Math.round(i/2.));  
+        }
+    }
     public static void main(String[] args) {
+        
+        stormArrowDmg();
+        Object o1,o2;
         int n1, n2;
         char c1, c2;
         String s1, s2;
+        
+        o1 = "a";
+        c1 = 'z';
+        o1 = c1;
+        o1 = o2 = null;
+        
+        o1 = "luna";
+        o2 = "1598";
+        System.out.println(o1+" "+o2);
+        
+        String unString = "(a,b,c(d,e),f(g,h,i))";    
         
         /*if(!false){
             //si verdadero
