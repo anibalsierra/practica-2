@@ -25,6 +25,7 @@ public class Pruebas {
     }
     public static void main(String[] args) {
         
+        /*
         stormArrowDmg();
         Object o1,o2;
         int n1, n2;
@@ -47,7 +48,7 @@ public class Pruebas {
         } else {
             //de lo contrario.
         } */
-        NodoSimple nS1, nS2;
+        /*NodoSimple nS1, nS2;
         NodoLg nLG1;
         Object dato;
         nS1 = new NodoSimple("d");
@@ -84,7 +85,8 @@ public class Pruebas {
                 ;
             default:
                 ;                    
-        }
+        }*/
+
     }
     
 }

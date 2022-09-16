@@ -10,10 +10,17 @@ package Practica2;
  * @author beto_
  */
 public class Hilera extends LSL {
-    
+           
     //En proceso.
+    /**Esta clase no se va a usar*/
     public int longitud(){
-        return 0; //trababo en proceso
+        int n=0;
+        NodoGod p = primerNodo();
+        while(!finDeRecorrido(p)){
+            n++;
+            p = p.retornaLiga();
+        }
+        return n;
     }
     public Hilera subHilera(int i, int j){
         int k, n;

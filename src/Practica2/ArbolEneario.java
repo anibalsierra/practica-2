@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Practica2;
 
 import java.util.Stack;
@@ -10,7 +13,7 @@ import java.util.Queue;
  * @author beto_
  */
 public class ArbolEneario extends ListaG {
-
+    
     public int altura(NodoLg L) {
         NodoLg p;
         int g, h;
@@ -33,7 +36,6 @@ public class ArbolEneario extends ListaG {
         }
         return h + 1;
     }
-
     public void ancestrosDeUnDato(String d) {
         int n = 0;
         char c;
@@ -85,7 +87,6 @@ public class ArbolEneario extends ListaG {
             System.out.println("Dato no está en el árbol");
         }
     }
-
     public void muestraPorNivel() {
         Queue cola;
         NodoLg p, q;
@@ -108,7 +109,6 @@ public class ArbolEneario extends ListaG {
             }
         }
     }
-
     public int gradoDeUnDato(String d) {
         int n = 0;
         NodoLg p, q;
