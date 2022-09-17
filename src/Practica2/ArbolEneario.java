@@ -242,6 +242,89 @@ public class ArbolEneario extends ListaG {
         return mayorGrado;
 
     }
+    // esto lo tengo para tener una idea se debe modificar para que funcione con listaLigada
+    public void CreacionHileraEnBaseDeNodoLg(NodoLg L, int band){
+        NodoLg p,primero,q;
+        Stack pila = new Stack();
+        if (L == null){
+            System.out.println("LISTA VACIA");
+            return;
+            
+        }
+        primero = null;
+        if (band == 0){
+            System.out.println("("+L.retornaLiga());
+            if(L.retornaLiga() == null){
+                System.out.println(")");
+                return;
+            }
+            System.out.println("(");
+            primero = L;
+        }
+        p = (NodoLg)L.retornaLiga();
+        while(p != null){
+            if(p.retornaSw() == 0){
+                System.out.println(p.retornaDato());
+            }else{
+                q = (NodoLg)p.retornaDato();
+                System.out.println(q.retornaDato()+"(");
+                CreacionHileraEnBaseDeNodoLg((NodoLg)p.retornaDato(),1);
+            }
+            if(p.retornaLiga() != null){
+                System.out.println(",");
+            }
+            p = (NodoLg)p.retornaLiga();
+        }
+        System.out.println(")");
+        if(primero == L){
+            System.out.println(")");
+        }
+        
+    }
+    
+    public void ConstruyeArbol(String hilo){
+        int n,i;
+        NodoLg primero,ultimo,x;
+        Stack pila = new Stack();
+        primero = new NodoLg(null);
+        ultimo = primero;
+        primero.asignaDato(hilo.charAt(2));
+        n = hilo.length();
+        if(n == 3){
+            return;
+        }
+        i = 4;
+        while(i <= n - 2){
+            x = new NodoLg(null);
+            ultimo.asignaLiga(x);
+            ultimo = x;
+            if ((hilo.charAt(i + 1) + "").equals("(")){
+                ultimo.asignaSw(1);
+                pila.push(ultimo);
+                x = new NodoLg(hilo.charAt(i));
+                ultimo.asignaDato(x);
+                ultimo = x;
+                i = i + 2;   
+            }else{
+                ultimo.asignaDato(hilo.charAt(i));
+                if((hilo.charAt(i + 1) + "").equals(")")){
+                    i = i + 1;
+                    while(1<n && (hilo.charAt(i) + "").equals(")") && !pila.empty()){
+                        ultimo = (NodoLg)pila.pop();
+                        i = i + 1;
+                    }
+                    if((hilo.charAt(i) + "").equals(",")){
+                        i = i + 1;
+                    }else{
+                        i = i + 2;
+                    }
+                    
+                }
+                
+            }
+        }
+        
+    }
     
     
     public void contruirArbolLg(String hilo) {
