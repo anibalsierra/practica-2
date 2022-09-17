@@ -8,7 +8,7 @@ import java.util.Queue;
 
 /**
  *
- * @author beto_
+ * @author beto & wil
  */
 public class ArbolEneario extends ListaG {
 
@@ -155,10 +155,52 @@ public class ArbolEneario extends ListaG {
     }
     
     public void hojasArbol(){
-        
-        
-        
+            Stack pila;
+            NodoLg iterador;
+            NodoLg primer = null;
+            pila = new Stack();
+            Stack pilarecorre;
+            pilarecorre = new Stack();
+            iterador = (NodoLg)primer.retornaLiga();
+            while(iterador != null){
+                if(iterador.retornaSw() == 0){
+                    if(iterador.retornaLiga() == null && !pilarecorre.empty()){
+                        iterador = (NodoLg)pilarecorre.pop();
+            }
+            }else if(iterador.retornaSw() == 1){
+                pila.push(iterador);
+                pilarecorre.push(iterador);
+                iterador = (NodoLg)iterador.retornaDato();
+            }
+                
+                iterador = (NodoLg)iterador.retornaLiga();           
     }
+            int hojas = 0;
+            while(!pila.empty()){
+                iterador = (NodoLg)pila.pop();
+                iterador = (NodoLg)iterador.retornaDato();
+                iterador = (NodoLg)iterador.retornaLiga();
+                while(iterador != null){
+                    if(iterador.retornaSw() == 0){
+                        hojas = hojas + 1;
+                        iterador = (NodoLg)iterador.retornaLiga();
+                        
+                    }else if(iterador.retornaSw() == 1){
+                        iterador = (NodoLg)iterador.retornaLiga();
+                    }
+                }
+            }
+            iterador = (NodoLg)primer.retornaLiga();
+            while(iterador != null){
+                if(iterador.retornaSw() == 0){
+                    hojas = hojas +1;
+                    iterador = (NodoLg)iterador.retornaLiga();
+                    
+                }else if(iterador.retornaSw() == 1){
+                    iterador = (NodoLg)iterador.retornaLiga();
+                }
+            }
+}
     
     public void gradoArbol(){
         
