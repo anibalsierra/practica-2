@@ -161,6 +161,7 @@ public class ArbolEneario extends ListaG {
             pila = new Stack();
             Stack pilarecorre;
             pilarecorre = new Stack();
+            //hay que revisar porque sale null point
             iterador = (NodoLg)primer.retornaLiga();
             while(iterador != null){
                 if(iterador.retornaSw() == 0){
@@ -202,9 +203,46 @@ public class ArbolEneario extends ListaG {
             }
 }
     
-    public void gradoArbol(){
-        
+    public int gradoArbol() {
+        NodoLg primer = null;
+        Stack pila;
+        Stack pilarecorre;
+        pila = new Stack();
+        pilarecorre = new Stack();
+        NodoLg iterador;
+        iterador = primer;
+        int mayorGrado = 0;
+        while (iterador != null) {
+            iterador = (NodoLg) iterador.retornaLiga();
+            if (iterador.retornaSw() == 0) {
+                if (iterador.retornaLiga() == null && !pilarecorre.empty()) {
+                    iterador = (NodoLg) pilarecorre.pop();
+                } else if (iterador.retornaSw() == 1) {
+                    pila.push(iterador);
+                    pilarecorre.push(iterador);
+                    iterador = (NodoLg) iterador.retornaDato();
+                }
+            }
+
+        }
+        while (!pila.empty()) {
+            //revisar el porque nose usa mas la pila 
+            iterador = (NodoLg) pila.pop();
+            iterador = (NodoLg) pilarecorre.pop();
+            iterador = (NodoLg) iterador.retornaLiga();
+            int grado = 0;
+            while (iterador != null) {
+                iterador = (NodoLg) iterador.retornaLiga();
+                grado = grado + 1;
+            }
+            if (grado > mayorGrado) {
+                mayorGrado = grado;
+            }
+        }
+        return mayorGrado;
+
     }
+    
     
     public void contruirArbolLg(String hilo) {
         int n, i;
