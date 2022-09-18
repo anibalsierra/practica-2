@@ -11,6 +11,59 @@ import java.util.Queue;
  * @author beto & wil
  */
 public class ArbolEneario extends ListaG {
+    
+    private NodoLg raiz;
+    
+    public ArbolEneario(String hilera) {
+        int n, i;
+        NodoLg primero, ultimo, x;
+        Stack pila;
+        pila = new Stack();
+        primero = new NodoLg(null);
+        ultimo = primero;
+        primero.asignaDato(hilera.charAt(2 - 1)); 
+        n = hilera.length();
+        // proceso cuando el árbol solo tiene un registro
+        if (n == 3) {  
+            this.raiz = primero;
+            return;
+        }
+        // posición del primero hijo de la raiz si lo tiene
+        i = 4 - 1; 
+        while (i <= n - 2 - 1) {
+            x = new NodoLg(null);
+            ultimo.asignaLiga(x);
+            ultimo = x;
+            // verificando si el primer hijo de la raiz tiene hijos
+            if ((hilera.charAt(i + 1) == '('))  {
+                ultimo.asignaSw(1);
+                pila.push(ultimo);
+                x = new NodoLg(hilera.charAt(i));
+                ultimo.asignaDato(x);
+                ultimo = x;
+                i = i + 2;
+            } else {
+                ultimo.asignaDato(hilera.charAt(i));
+                //se verifica si el primer hijo de la raiz tiene hermanos o no
+                // (a(b,c,d)) (a(b(c,d))) (a(b))
+                if ((hilera.charAt(i + 1) == ')')) {
+                    i = i + 1;
+                    while (i < n && (hilera.charAt(i) + "").equals(")") && !pila.empty()) {
+                        ultimo = (NodoLg) pila.pop();
+                        i = i + 1;
+                    }
+                    if ((hilera.charAt(i) + "").equals(",")) {
+                        i = i + 1;
+                    } else {
+                        i = i + 2;
+                    }
+                }
+
+            }
+
+        }
+
+    }
 
     public int altura(NodoLg Lg) {
         NodoLg p;
@@ -282,6 +335,7 @@ public class ArbolEneario extends ListaG {
         
     }
     
+    {/*
     public void ConstruyeArbol(String hilo){
         int n,i;
         NodoLg primero,ultimo,x;
@@ -325,51 +379,8 @@ public class ArbolEneario extends ListaG {
         }
         
     }
+    */}
     
     
-    public void contruirArbolLg(String hilo) {
-        int n, i;
-        NodoLg primero, ultimo, x;
-        Stack pila;
-        pila = new Stack();
-        primero = new NodoLg(null);
-        ultimo = primero;
-        primero.asignaDato(hilo.charAt(2));
-        n = hilo.length();
-        if (n == 3) {
-            return;
-        }
-        i = 4;
-        while (i <= n - 2) {
-            x = new NodoLg(null);
-            ultimo.asignaLiga(x);
-            ultimo = x;
-            if ((hilo.charAt(i + 1) + "").equals("(")) {
-                ultimo.asignaSw(1);
-                pila.push(ultimo);
-                x = new NodoLg(hilo.charAt(i));
-                ultimo.asignaDato(x);
-                ultimo = x;
-                i = i + 2;
-            } else {
-                ultimo.asignaDato(hilo.charAt(i));
-                if ((hilo.charAt(i + 1) + "").equals (")")) {
-                    i = i + 1;
-                    while (i < n && (hilo.charAt(i) + "").equals(")") && !pila.empty()) {
-                        ultimo = (NodoLg) pila.pop();
-                        i = i + 1;
-                    }
-                    if ((hilo.charAt(i) + "").equals(",")) {
-                        i = i + 1;
-                    } else {
-                        i = i + 2;
-                    }
-                }
-
-            }
-
-        }
-
-    }
     
 }
