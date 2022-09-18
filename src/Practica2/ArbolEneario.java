@@ -1,18 +1,20 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Practica2;
 
 import java.util.Stack;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.Queue;
 
-
 /**
  *
- * @author beto & wil
+ * @author beto_
  */
 public class ArbolEneario extends ListaG {
     
-    private NodoLg raiz;
+   private NodoLg raiz;
     
     public ArbolEneario(String hilera) {
         int n, i;
@@ -22,19 +24,19 @@ public class ArbolEneario extends ListaG {
         primero = new NodoLg(null);
         ultimo = primero;
         primero.asignaDato(hilera.charAt(2 - 1)); 
-        n = hilera.length();
+        n = hilera.length() - 1;
         // proceso cuando el árbol solo tiene un registro
-        if (n == 3) {  
+        if ((n + 1) == 3) {  
             this.raiz = primero;
             return;
         }
-        // posición del primero hijo de la raiz si lo tiene
+        // determinar la posición del primero hijo de la raiz si lo tiene
         i = 4 - 1; 
-        while (i <= n - 2 - 1) {
+        while (i <= n - 2) {
             x = new NodoLg(null);
             ultimo.asignaLiga(x);
             ultimo = x;
-            // verificando si el primer hijo de la raiz tiene hijos
+            //determinar si el registro procesado siguiente tiene hijos.
             if ((hilera.charAt(i + 1) == '('))  {
                 ultimo.asignaSw(1);
                 pila.push(ultimo);
@@ -44,27 +46,24 @@ public class ArbolEneario extends ListaG {
                 i = i + 2;
             } else {
                 ultimo.asignaDato(hilera.charAt(i));
-                //se verifica si el primer hijo de la raiz tiene hermanos o no
-                // (a(b,c,d)) (a(b(c,d))) (a(b))
+                //determinar si el registro procesado tiene hermanos, hijos o ninguno de los anteriores
                 if ((hilera.charAt(i + 1) == ')')) {
                     i = i + 1;
-                    while (i < n - 1 && (hilera.charAt(i) == (')')) && !pila.empty()) {
+                    //en el while se determina si se acabó de procesar una sublista o la lista al completo
+                    while (i < n && (hilera.charAt(i) == (')')) && !pila.empty()) {                        
                         ultimo = (NodoLg) pila.pop();
                         i = i + 1;
                     }
                     if (hilera.charAt(i) == (',')) {
                         i = i + 1;
-                    } else {
+                    } 
+                } else {
                         i = i + 2;
-                    }
                 }
-
             }
-
         }
-
+        this.raiz = primero;
     }
-
     public int altura(NodoLg Lg) {
         NodoLg p;
         int g, h;
@@ -87,7 +86,6 @@ public class ArbolEneario extends ListaG {
         }
         return h + 1;
     }
-
     public void ancestrosDeUnDato(String d) {
         int n = 0;
         char c;
@@ -139,7 +137,6 @@ public class ArbolEneario extends ListaG {
             System.out.println("Dato no está en el árbol");
         }
     }
-
     public void muestraPorNivel() {
         Queue cola;
         NodoLg p, q;
@@ -162,7 +159,6 @@ public class ArbolEneario extends ListaG {
             }
         }
     }
-
     public int gradoDeUnDato(String d) {
         int n = 0;
         NodoLg p, q;
@@ -205,8 +201,7 @@ public class ArbolEneario extends ListaG {
         System.out.println("dato no esta en el arbol");
         return 0;
 
-    }
-    
+    }    
     public void hojasArbol(){
             Stack pila;
             NodoLg iterador;
@@ -254,8 +249,7 @@ public class ArbolEneario extends ListaG {
                     iterador = (NodoLg)iterador.retornaLiga();
                 }
             }
-}
-    
+}    
     public int gradoArbol() {
         NodoLg primer = null;
         Stack pila;
@@ -333,8 +327,7 @@ public class ArbolEneario extends ListaG {
             System.out.println(")");
         }
         
-    }
-    
+    }    
     {/*
     public void ConstruyeArbol(String hilo){
         int n,i;
@@ -380,7 +373,4 @@ public class ArbolEneario extends ListaG {
         
     }
     */}
-    
-    
-    
 }
