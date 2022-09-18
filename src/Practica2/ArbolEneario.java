@@ -218,7 +218,8 @@ public class ArbolEneario extends ListaG {
         }
         System.out.println("dato no esta en el arbol");
         return 0;
-    }    
+    }
+    //algoritmo no funciona, toca rehacer
     public void hojasArbol() {
         Stack pila;
         NodoLg iterador;
@@ -267,6 +268,7 @@ public class ArbolEneario extends ListaG {
             }
         }
     }
+    //algoritmo no funciona, toca rehacer
     public int gradoArbol() {
         NodoLg primer = null;
         Stack pila;
