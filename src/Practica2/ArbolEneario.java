@@ -1,21 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Practica2;
 
 import java.util.Stack;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.Queue;
 
+
 /**
  *
- * @author beto_
+ * @author beto & wil
  */
 public class ArbolEneario extends ListaG {
-    
-   private NodoLg raiz;
-    
+
+    private NodoLg raiz;
+
     public ArbolEneario(String hilera) {
         int n, i;
         NodoLg primero, ultimo, x;
@@ -23,21 +21,21 @@ public class ArbolEneario extends ListaG {
         pila = new Stack();
         primero = new NodoLg(null);
         ultimo = primero;
-        primero.asignaDato(hilera.charAt(2 - 1)); 
+        primero.asignaDato(hilera.charAt(2 - 1));
         n = hilera.length() - 1;
         // proceso cuando el árbol solo tiene un registro
-        if ((n + 1) == 3) {  
+        if ((n + 1) == 3) {
             this.raiz = primero;
             return;
         }
         // determinar la posición del primero hijo de la raiz si lo tiene
-        i = 4 - 1; 
+        i = 4 - 1;
         while (i <= n - 2) {
             x = new NodoLg(null);
             ultimo.asignaLiga(x);
             ultimo = x;
             //determinar si el registro procesado siguiente tiene hijos.
-            if ((hilera.charAt(i + 1) == '('))  {
+            if ((hilera.charAt(i + 1) == '(')) {
                 ultimo.asignaSw(1);
                 pila.push(ultimo);
                 x = new NodoLg(hilera.charAt(i));
@@ -50,24 +48,38 @@ public class ArbolEneario extends ListaG {
                 if ((hilera.charAt(i + 1) == ')')) {
                     i = i + 1;
                     //en el while se determina si se acabó de procesar una sublista o la lista al completo
-                    while (i < n && (hilera.charAt(i) == (')')) && !pila.empty()) {                        
+                    while (i < n && (hilera.charAt(i) == (')')) && !pila.empty()) {
                         ultimo = (NodoLg) pila.pop();
                         i = i + 1;
                     }
                     if (hilera.charAt(i) == (',')) {
                         i = i + 1;
-                    } 
+                    }
                 } else {
-                        i = i + 2;
+                    i = i + 2;
                 }
             }
         }
         this.raiz = primero;
     }
+
+    public ArbolEneario() {
+        this.raiz = null;
+    }
+
+    public NodoLg retornaRaiz() {
+        return this.raiz;
+    }
+
+    @Override
+    public boolean esVacia() {
+        return this.raiz == null;
+    }
+
     public int altura(NodoLg Lg) {
         NodoLg p;
         int g, h;
-        h = 1;
+        h = 1;  
         if (Lg == null) {
             return 0;
         }
@@ -77,15 +89,16 @@ public class ArbolEneario extends ListaG {
         p = Lg;
         while (p != null) {
             if (p.retornaSw() == 1) {
-                g = altura((NodoLg) p.retornaDato());
+                g = altura((NodoLg)p.retornaDato()); 
                 if (g > h) {
                     h = g;
                 }
             }
-            p = (NodoLg) p.retornaLiga();
+            p = (NodoLg)p.retornaLiga();
         }
         return h + 1;
     }
+
     public void ancestrosDeUnDato(String d) {
         int n = 0;
         char c;
@@ -137,7 +150,9 @@ public class ArbolEneario extends ListaG {
             System.out.println("Dato no está en el árbol");
         }
     }
-    public void muestraPorNivel() {
+
+    //hay que modificar el algoritmo
+    public void muestraPorNivel(NodoLg L) {
         Queue cola;
         NodoLg p, q;
         cola = new ConcurrentLinkedQueue();
@@ -159,6 +174,7 @@ public class ArbolEneario extends ListaG {
             }
         }
     }
+
     public int gradoDeUnDato(String d) {
         int n = 0;
         NodoLg p, q;
@@ -201,55 +217,57 @@ public class ArbolEneario extends ListaG {
         System.out.println("dato no esta en el arbol");
         return 0;
 
-    }    
-    public void hojasArbol(){
-            Stack pila;
-            NodoLg iterador;
-            NodoLg primer = null;
-            pila = new Stack();
-            Stack pilarecorre;
-            pilarecorre = new Stack();
-            //hay que revisar porque sale null point
-            iterador = (NodoLg)primer.retornaLiga();
-            while(iterador != null){
-                if(iterador.retornaSw() == 0){
-                    if(iterador.retornaLiga() == null && !pilarecorre.empty()){
-                        iterador = (NodoLg)pilarecorre.pop();
-            }
-            }else if(iterador.retornaSw() == 1){
+    }
+
+    public void hojasArbol() {
+        Stack pila;
+        NodoLg iterador;
+        NodoLg primer = null;
+        pila = new Stack();
+        Stack pilarecorre;
+        pilarecorre = new Stack();
+        //hay que revisar porque sale null point
+        iterador = (NodoLg) primer.retornaLiga();
+        while (iterador != null) {
+            if (iterador.retornaSw() == 0) {
+                if (iterador.retornaLiga() == null && !pilarecorre.empty()) {
+                    iterador = (NodoLg) pilarecorre.pop();
+                }
+            } else if (iterador.retornaSw() == 1) {
                 pila.push(iterador);
                 pilarecorre.push(iterador);
-                iterador = (NodoLg)iterador.retornaDato();
+                iterador = (NodoLg) iterador.retornaDato();
             }
-                
-                iterador = (NodoLg)iterador.retornaLiga();           
+
+            iterador = (NodoLg) iterador.retornaLiga();
+        }
+        int hojas = 0;
+        while (!pila.empty()) {
+            iterador = (NodoLg) pila.pop();
+            iterador = (NodoLg) iterador.retornaDato();
+            iterador = (NodoLg) iterador.retornaLiga();
+            while (iterador != null) {
+                if (iterador.retornaSw() == 0) {
+                    hojas = hojas + 1;
+                    iterador = (NodoLg) iterador.retornaLiga();
+
+                } else if (iterador.retornaSw() == 1) {
+                    iterador = (NodoLg) iterador.retornaLiga();
+                }
+            }
+        }
+        iterador = (NodoLg) primer.retornaLiga();
+        while (iterador != null) {
+            if (iterador.retornaSw() == 0) {
+                hojas = hojas + 1;
+                iterador = (NodoLg) iterador.retornaLiga();
+
+            } else if (iterador.retornaSw() == 1) {
+                iterador = (NodoLg) iterador.retornaLiga();
+            }
+        }
     }
-            int hojas = 0;
-            while(!pila.empty()){
-                iterador = (NodoLg)pila.pop();
-                iterador = (NodoLg)iterador.retornaDato();
-                iterador = (NodoLg)iterador.retornaLiga();
-                while(iterador != null){
-                    if(iterador.retornaSw() == 0){
-                        hojas = hojas + 1;
-                        iterador = (NodoLg)iterador.retornaLiga();
-                        
-                    }else if(iterador.retornaSw() == 1){
-                        iterador = (NodoLg)iterador.retornaLiga();
-                    }
-                }
-            }
-            iterador = (NodoLg)primer.retornaLiga();
-            while(iterador != null){
-                if(iterador.retornaSw() == 0){
-                    hojas = hojas +1;
-                    iterador = (NodoLg)iterador.retornaLiga();
-                    
-                }else if(iterador.retornaSw() == 1){
-                    iterador = (NodoLg)iterador.retornaLiga();
-                }
-            }
-}    
+
     public int gradoArbol() {
         NodoLg primer = null;
         Stack pila;
@@ -289,45 +307,47 @@ public class ArbolEneario extends ListaG {
         return mayorGrado;
 
     }
+
     // esto lo tengo para tener una idea se debe modificar para que funcione con listaLigada
-    public void CreacionHileraEnBaseDeNodoLg(NodoLg L, int band){
-        NodoLg p,primero,q;
+    public void CreacionHileraEnBaseDeNodoLg(NodoLg L, int band) {
+        NodoLg p, primero, q;
         Stack pila = new Stack();
-        if (L == null){
+        if (L == null) {
             System.out.println("LISTA VACIA");
             return;
-            
+
         }
         primero = null;
-        if (band == 0){
-            System.out.println("("+L.retornaLiga());
-            if(L.retornaLiga() == null){
+        if (band == 0) {
+            System.out.println("(" + L.retornaLiga());
+            if (L.retornaLiga() == null) {
                 System.out.println(")");
                 return;
             }
             System.out.println("(");
             primero = L;
         }
-        p = (NodoLg)L.retornaLiga();
-        while(p != null){
-            if(p.retornaSw() == 0){
+        p = (NodoLg) L.retornaLiga();
+        while (p != null) {
+            if (p.retornaSw() == 0) {
                 System.out.println(p.retornaDato());
-            }else{
-                q = (NodoLg)p.retornaDato();
-                System.out.println(q.retornaDato()+"(");
-                CreacionHileraEnBaseDeNodoLg((NodoLg)p.retornaDato(),1);
+            } else {
+                q = (NodoLg) p.retornaDato();
+                System.out.println(q.retornaDato() + "(");
+                CreacionHileraEnBaseDeNodoLg((NodoLg) p.retornaDato(), 1);
             }
-            if(p.retornaLiga() != null){
+            if (p.retornaLiga() != null) {
                 System.out.println(",");
             }
-            p = (NodoLg)p.retornaLiga();
+            p = (NodoLg) p.retornaLiga();
         }
         System.out.println(")");
-        if(primero == L){
+        if (primero == L) {
             System.out.println(")");
         }
-        
-    }    
+
+    }
+
     {/*
     public void ConstruyeArbol(String hilo){
         int n,i;
@@ -372,5 +392,9 @@ public class ArbolEneario extends ListaG {
         }
         
     }
-    */}
+         */
+    }
+    
+    
+    
 }
