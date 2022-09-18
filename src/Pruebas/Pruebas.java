@@ -23,7 +23,22 @@ public class Pruebas {
             System.out.println(Math.round(i/2.));  
         }
     }
+    private static void pruebaConstruyeArbol(){
+            String hilera = "(a)";
+            int n = hilera.length();
+            NodoLg primero,ultimo,x;
+            ultimo = primero = new NodoLg(null);
+            primero.asignaDato(hilera.charAt(2 - 1));
+            x = new NodoLg(null);
+            ultimo.asignaLiga(x);
+            primero.asignaDato("c");
+            System.out.println(n);
+            System.out.println(ultimo.retornaDato());
+        
+        }
     public static void main(String[] args) {
+        
+        //pruebaConstruyeArbol();
         
         /*
         stormArrowDmg();
