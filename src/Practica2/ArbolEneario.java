@@ -13,7 +13,7 @@ import java.util.Queue;
 public class ArbolEneario extends ListaG {
 
     private NodoLg raiz;
-
+    //revisado
     public ArbolEneario(String hilera) {
         int n, i;
         NodoLg primero, ultimo, x;
@@ -62,7 +62,7 @@ public class ArbolEneario extends ListaG {
         }
         this.raiz = primero;
     }
-
+    
     public ArbolEneario() {
         this.raiz = null;
     }
@@ -75,7 +75,7 @@ public class ArbolEneario extends ListaG {
     public boolean esVacia() {
         return this.raiz == null;
     }
-
+    //revisado
     public int altura(NodoLg Lg) {
         NodoLg p;
         int g, h;
@@ -218,7 +218,7 @@ public class ArbolEneario extends ListaG {
         return 0;
 
     }
-
+    
     public void hojasArbol() {
         Stack pila;
         NodoLg iterador;
