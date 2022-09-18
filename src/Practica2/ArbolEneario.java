@@ -48,11 +48,11 @@ public class ArbolEneario extends ListaG {
                 // (a(b,c,d)) (a(b(c,d))) (a(b))
                 if ((hilera.charAt(i + 1) == ')')) {
                     i = i + 1;
-                    while (i < n && (hilera.charAt(i) + "").equals(")") && !pila.empty()) {
+                    while (i < n - 1 && (hilera.charAt(i) == (')')) && !pila.empty()) {
                         ultimo = (NodoLg) pila.pop();
                         i = i + 1;
                     }
-                    if ((hilera.charAt(i) + "").equals(",")) {
+                    if (hilera.charAt(i) == (',')) {
                         i = i + 1;
                     } else {
                         i = i + 2;
