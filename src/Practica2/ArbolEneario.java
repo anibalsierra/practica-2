@@ -151,28 +151,63 @@ private NodoLg raiz;
         }
         System.out.println("Dato no está en el árbol");
     }
-    //hay que modificar el algoritmo
-    public void muestraPorNivel(NodoLg L) {
+    //revisado
+    public void muestraNivelDeRegistro(String d) {
         Queue cola;
         NodoLg p, q;
         cola = new ConcurrentLinkedQueue();
         p = (NodoLg) primerNodo();
+        int numEncoladas = 0;
+        int numVecesEncoladasPorNivel=0;
+        boolean cambioNivel = true;
         if (p == null) {
+            System.out.println("El árbol está vacio, por tanto el dato no existe");
             return;
         }
+        int nivel = 1;
+        if((char)p.retornaDato()== d.charAt(0)){            
+            System.out.println("El dato \""+d+"\", es la raiz del árlbol por tanto está"
+                    + " en el nivel: "+nivel);
+        }        
+        p = (NodoLg)p.retornaLiga();
+        if (p == null) {
+            System.out.println("El dato buscado no está en el árbol");
+            return;
+        }
+        nivel++;
         while (p != null) {
             if (p.retornaSw() == 0) {
-                System.out.println((char) p.retornaDato() + " , ");
+                if((char)p.retornaDato()== d.charAt(0)){            
+                    System.out.println("El dato \""+d+"\", está en el nivel: "+nivel);
+                    return;
+                }                
             } else {
                 q = (NodoLg) p.retornaDato();
-                System.out.println((char) q.retornaDato() + " , ");
+                if((char)q.retornaDato()== d.charAt(0)){            
+                    System.out.println("El dato \""+d+"\", está en el nivel: "+nivel);
+                    return;
+                }
                 cola.add(q.retornaLiga());
+                numEncoladas++;
             }
             p = (NodoLg) p.retornaLiga();
-            while (p == null && !cola.isEmpty()) {
+            if(p == null && !cola.isEmpty()&& cambioNivel == true){
+                numVecesEncoladasPorNivel = numEncoladas;                
+            }
+            while (p == null && !cola.isEmpty()) {                
+                if(cambioNivel){
+                    nivel++;
+                    cambioNivel = false;
+                }                
                 p = (NodoLg) cola.poll();
+                numVecesEncoladasPorNivel--;
+                numEncoladas--;
+                if(numVecesEncoladasPorNivel==0){
+                    cambioNivel = true;
+                }
             }
         }
+        System.out.println("El dato buscado no está en el árbol");
     }
     //revisado
     public int gradoDeUnDato(String d) {
