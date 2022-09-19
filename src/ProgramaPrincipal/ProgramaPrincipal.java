@@ -24,7 +24,7 @@ public class ProgramaPrincipal {
                 String num = lector.nextLine();
                 switch (num) {
                     case "1":
-                        System.out.println("la hilera debe estar bien construida" + "\nun ejemplo de hilera puede ser (a,(b,c,d))"
+                        System.out.println("la hilera debe estar bien construida" + "\nun ejemplo de hilera puede ser (a(b,c,d))"
                                 + "\npase la hilera que quiera utilizar");
                         hilera = lector.nextLine();
                         arbol = new ArbolEneario(hilera);
