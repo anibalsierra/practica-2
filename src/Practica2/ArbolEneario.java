@@ -252,94 +252,68 @@ private NodoLg raiz;
         System.out.println("dato no esta en el arbol");
         return 0;
     }
-    //algoritmo no funciona, toca rehacer
-    public void hojasArbol() {
-        Stack pila;
-        NodoLg iterador;
-        NodoLg primer = null;
-        pila = new Stack();
-        Stack pilarecorre;
-        pilarecorre = new Stack();
-        //hay que revisar porque sale null point
-        iterador = (NodoLg) primer.retornaLiga();
-        while (iterador != null) {
-            if (iterador.retornaSw() == 0) {
-                if (iterador.retornaLiga() == null && !pilarecorre.empty()) {
-                    iterador = (NodoLg) pilarecorre.pop();
-                }
-            } else if (iterador.retornaSw() == 1) {
-                pila.push(iterador);
-                pilarecorre.push(iterador);
-                iterador = (NodoLg) iterador.retornaDato();
+    //revisado
+    public int hojasArbol() {
+        Queue cola;
+        NodoLg p, q;
+        cola = new ConcurrentLinkedQueue();
+        p = (NodoLg) primerNodo();
+        int hojas = 0;        
+        if (p == null) {
+            System.out.println("El árbol está vacio");
+            return hojas;
+        }                
+        p = (NodoLg)p.retornaLiga();
+        if (p == null) {
+            hojas++;
+            return hojas;
+        }        
+        while (p != null) {
+            if (p.retornaSw() == 0) {
+                hojas++;                               
+            } else {
+                q = (NodoLg) p.retornaDato();                
+                cola.add(q.retornaLiga());                
             }
-
-            iterador = (NodoLg) iterador.retornaLiga();
-        }
-        int hojas = 0;
-        while (!pila.empty()) {
-            iterador = (NodoLg) pila.pop();
-            iterador = (NodoLg) iterador.retornaDato();
-            iterador = (NodoLg) iterador.retornaLiga();
-            while (iterador != null) {
-                if (iterador.retornaSw() == 0) {
-                    hojas = hojas + 1;
-                    iterador = (NodoLg) iterador.retornaLiga();
-
-                } else if (iterador.retornaSw() == 1) {
-                    iterador = (NodoLg) iterador.retornaLiga();
-                }
+            p = (NodoLg) p.retornaLiga();            
+            while (p == null && !cola.isEmpty()) {                              
+                p = (NodoLg) cola.poll();                
             }
         }
-        iterador = (NodoLg) primer.retornaLiga();
-        while (iterador != null) {
-            if (iterador.retornaSw() == 0) {
-                hojas = hojas + 1;
-                iterador = (NodoLg) iterador.retornaLiga();
-
-            } else if (iterador.retornaSw() == 1) {
-                iterador = (NodoLg) iterador.retornaLiga();
-            }
-        }
+        return hojas;
     }
-    //algoritmo no funciona, toca rehacer
+    //revisado
     public int gradoArbol() {
-        NodoLg primer = null;
-        Stack pila;
-        Stack pilarecorre;
-        pila = new Stack();
-        pilarecorre = new Stack();
-        NodoLg iterador;
-        iterador = primer;
+        Queue cola;
+        NodoLg p, q;
+        cola = new ConcurrentLinkedQueue();
+        p = (NodoLg) primerNodo();
         int mayorGrado = 0;
-        while (iterador != null) {
-            iterador = (NodoLg) iterador.retornaLiga();
-            if (iterador.retornaSw() == 0) {
-                if (iterador.retornaLiga() == null && !pilarecorre.empty()) {
-                    iterador = (NodoLg) pilarecorre.pop();
-                } else if (iterador.retornaSw() == 1) {
-                    pila.push(iterador);
-                    pilarecorre.push(iterador);
-                    iterador = (NodoLg) iterador.retornaDato();
+        int grado = 0;
+        if (p == null||p.retornaLiga()==null) {
+            return mayorGrado;
+        }       
+        p = (NodoLg)p.retornaLiga();
+        while (p != null) {
+            if (p.retornaSw() == 0) {
+                grado++;                               
+            } else {
+                q = (NodoLg) p.retornaDato();
+                grado++;                
+                cola.add(q.retornaLiga());                
+            }
+            p = (NodoLg) p.retornaLiga();            
+            if(p == null){
+                if(mayorGrado<grado){
+                   mayorGrado = grado; 
                 }
             }
-
-        }
-        while (!pila.empty()) {
-            //revisar el porque nose usa mas la pila 
-            iterador = (NodoLg) pila.pop();
-            iterador = (NodoLg) pilarecorre.pop();
-            iterador = (NodoLg) iterador.retornaLiga();
-            int grado = 0;
-            while (iterador != null) {
-                iterador = (NodoLg) iterador.retornaLiga();
-                grado = grado + 1;
-            }
-            if (grado > mayorGrado) {
-                mayorGrado = grado;
+            while (p == null && !cola.isEmpty()) {
+                grado = 0;                                
+                p = (NodoLg) cola.poll();                
             }
         }
         return mayorGrado;
-
     }
     // esto lo tengo para tener una idea se debe modificar para que funcione con listaLigada
     public void CreacionHileraEnBaseDeNodoLg(NodoLg L, int band) {
