@@ -315,43 +315,43 @@ private NodoLg raiz;
         }
         return mayorGrado;
     }
-    // esto lo tengo para tener una idea se debe modificar para que funcione con listaLigada
+    //revisado
     public void CreacionHileraEnBaseDeNodoLg(NodoLg L, int band) {
         NodoLg p, primero, q;
         Stack pila = new Stack();
         if (L == null) {
-            System.out.println("LISTA VACIA");
+            System.out.print("LISTA VACIA");
             return;
 
         }
         primero = null;
         if (band == 0) {
             // se modifica dentro del print L.retornaLiga por L.retornDato
-            System.out.println("(" + L.retornaDato());
+            System.out.print("(" + L.retornaDato());
             if (L.retornaLiga() == null) {
-                System.out.println(")");
+                System.out.print(")");
                 return;
             }
-            System.out.println("(");
+            System.out.print("(");
             primero = L;
         }
         p = (NodoLg) L.retornaLiga();
         while (p != null) {
             if (p.retornaSw() == 0) {
-                System.out.println(p.retornaDato());
+                System.out.print(p.retornaDato());
             } else {
                 q = (NodoLg) p.retornaDato();
-                System.out.println(q.retornaDato() + "(");
+                System.out.print(q.retornaDato() + "(");
                 CreacionHileraEnBaseDeNodoLg((NodoLg) p.retornaDato(), 1);
             }
             if (p.retornaLiga() != null) {
-                System.out.println(",");
+                System.out.print(",");
             }
             p = (NodoLg) p.retornaLiga();
         }
-        System.out.println(")");
+        System.out.print(")");
         if (primero == L) {
-            System.out.println(")");
+            System.out.print(")");
         }
 
     }
@@ -399,8 +399,7 @@ private NodoLg raiz;
         }
         
     }
-         */
+*/
     }
-  
     
 }
