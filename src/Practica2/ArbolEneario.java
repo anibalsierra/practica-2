@@ -1,20 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Practica2;
 
 import java.util.Stack;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.Queue;
 
+
 /**
  *
- * @author beto_
+ * @author beto & wil
  */
 public class ArbolEneario extends ListaG {
-   
-    private NodoLg raiz;
+
+private NodoLg raiz;
     //revisado
     public ArbolEneario(String hilera) {
         int n, i;
@@ -150,8 +148,8 @@ public class ArbolEneario extends ListaG {
                 c = (char) pila.pop();
                 p = (NodoLg) pila.pop();
             }
-            System.out.println("Dato no está en el árbol");
         }
+        System.out.println("Dato no está en el árbol");
     }
     //hay que modificar el algoritmo
     public void muestraPorNivel(NodoLg L) {
@@ -319,7 +317,8 @@ public class ArbolEneario extends ListaG {
         }
         primero = null;
         if (band == 0) {
-            System.out.println("(" + L.retornaLiga());
+            // se modifica dentro del print L.retornaLiga por L.retornDato
+            System.out.println("(" + L.retornaDato());
             if (L.retornaLiga() == null) {
                 System.out.println(")");
                 return;
@@ -393,4 +392,6 @@ public class ArbolEneario extends ListaG {
     }
          */
     }
+  
+    
 }
