@@ -107,7 +107,7 @@ private NodoLg raiz;
         Stack pila = new Stack();
         p = (NodoLg) primerNodo();
         if ((char) p.retornaDato() == d.charAt(0)) {
-            System.out.println("el dato es la raiz, por tanto no tiene ancestros");
+            System.out.println("el dato es la raiz y por tanto su ancestro es: " + d.charAt(0));
             return;
         }
         pila.push(p.retornaDato());
@@ -116,6 +116,7 @@ private NodoLg raiz;
             if (p.retornaSw() == 0) {
                 if ((char) p.retornaDato() == d.charAt(0)) {
                     System.out.println("Los ancestros de \""+d+"\" son:");
+                    System.out.print(d + ", ");
                     while (!pila.empty()) {
                         c = (char) pila.pop();
                         System.out.print(c + ", ");
@@ -123,6 +124,7 @@ private NodoLg raiz;
                             p = (NodoLg) pila.pop();
                         }
                     }
+                    System.out.print("\n");
                     return;
                 }
                 p = (NodoLg) p.retornaLiga();
@@ -130,6 +132,7 @@ private NodoLg raiz;
                 q = (NodoLg) p.retornaDato();
                 if ((char) q.retornaDato() == d.charAt(0)) {
                     System.out.println("Los ancestros de \""+d+"\" son:");
+                    System.out.print(d + ", ");
                     while (!pila.empty()) {
                         c = (char) pila.pop();
                         System.out.print(c + ", ");
@@ -137,6 +140,7 @@ private NodoLg raiz;
                             p = (NodoLg) pila.pop();
                         }
                     }
+                    System.out.print("\n");
                     return;
                 } else {
                     pila.push(p.retornaLiga());

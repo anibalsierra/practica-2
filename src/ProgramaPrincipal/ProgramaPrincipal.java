@@ -10,11 +10,70 @@ import java.util.InputMismatchException;
  */
 public class ProgramaPrincipal {
     
-    //static Scanner scan = new Scanner(System.in);
+    private static Scanner lector = new Scanner(System.in);
+    private static ArbolEneario arbol = new ArbolEneario();
+    private static NodoLg Lg;
+    private static String hilera;
+    
+    public static void practica() {
+        loop:
+        while (true) {
+            mostrarMenu();
+            System.out.print("escoga la opcion que desea utilizar -> ");
+            try {
+                String num = lector.nextLine();
+                switch (num) {
+                    case "1":
+                        System.out.println("la hilera debe estar bien construida" + "\nun ejemplo de hilera puede ser (a,(b,c,d))"
+                                + "\npase la hilera que quiera utilizar");
+                        hilera = lector.nextLine();
+                        arbol = new ArbolEneario(hilera);
+                        break;
+                    case "2":
+                        Lg = (NodoLg) arbol.primerNodo();
+                        int band = 0;
+                        arbol.CreacionHileraEnBaseDeNodoLg(Lg, band);
+                        break;
+                    case "3":
+                        Lg = (NodoLg) arbol.primerNodo();
+                        System.out.println("la altura del arbol es: " + arbol.altura(Lg));
+                        break;
+                    case "4":
+                        System.out.println("el grado del arbol es: " + arbol.gradoArbol());
+                        break;
+                    case "5":                        
+                        System.out.println("las hojas del arbol son: " + arbol.hojasArbol());
+                        break;
+                    case "6":
+                        System.out.print("digite el dato: ");
+                        hilera = lector.nextLine();
+                        System.out.println("el grado del dato ingresado es: " + arbol.gradoDeUnDato(hilera));
+                        break;
+                    case "7":
+                        System.out.println("digite el dato: ");
+                        hilera = lector.nextLine();
+                        arbol.muestraNivelDeRegistro(hilera);
+                        break;
+                    case "8":
+                        System.out.println("digite el dato");
+                        hilera = lector.nextLine();
+                        arbol.ancestrosDeUnDato(hilera);
+                        break;
+                    case "9":
+                        System.out.println("acaba de cerrar el menu");
+                        break loop;                        
+                    default: {
+                        break;
+                    }
+                }
+            } catch (InputMismatchException e) {
+            }
+        }
+    }   
     public static void mostrarMenu(){
         
         System.out.println("""
-                           Menu:
+                           \nMenu:
                            1. Construir lista generalizada con un String
                            2. Mostrar el String correspondiente a una lista generalizada
                            3. Determinar e imprimir altura del \u00e1rbol
@@ -26,83 +85,7 @@ public class ProgramaPrincipal {
                            9. salir del menu.
                            """);
     }
-    public static void main(String[] args){
-        //se debe construir un arbol para poder trabajar en el
-        Scanner lector = new Scanner(System.in);
-        ArbolEneario arbol = new ArbolEneario();
-        NodoLg Lg;
-        String hilera;
-        //System.out.println("profavor ingrese el arbol deseado");
-        
-        
-        loop: while(true){
-                mostrarMenu(); 
-                System.out.print("escoga la opcion que desea utilizar -> ");
-                
-            try{
-                String num = lector.nextLine();
-                
-                
-                
-                //String hilera = "(a(b,c,d))";
-                switch (num){
-                    case "1":
-                        System.out.println("pase la hilera que quiera utilizar; debe estar bien construida la hilera"
-                                + "\nun ejemplo de hilera puede ser (a,(b,c,d))");
-                        hilera = lector.nextLine();
-                        arbol = new ArbolEneario(hilera);
-                        break;
-                    case "2":
-                        Lg = (NodoLg)arbol.primerNodo();
-                        int band = 0;
-                        arbol.CreacionHileraEnBaseDeNodoLg(Lg, band);
-                        break;
-                    case "3":
-                        Lg = (NodoLg)arbol.primerNodo();
-                        System.out.println(arbol.altura(Lg));
-                        break;
-                    case "4":
-                        arbol.gradoArbol();
-                        break;
-                    case "5":
-                        arbol.hojasArbol();
-                        break;
-                    case "6":
-                        System.out.println("digite el dato");
-                        hilera = lector.nextLine();
-                        System.out.println(arbol.gradoDeUnDato(hilera));
-                        break;
-                    case "7":
-                        Lg = (NodoLg)arbol.primerNodo();
-                        arbol.muestraPorNivel(Lg);
-                        break;
-                    case "8": 
-                        System.out.println("digite el dato");
-                        hilera = lector.nextLine();
-                        arbol.ancestrosDeUnDato(hilera);
-                        break;
-                    case "9":
-                        break loop;
-                        
-                    default:{
-                        break;
-                            }
-                        
-                   
-                    
-                }
-            }catch(InputMismatchException e){
-                
-            }    
-                
-        }
-    
-        
-        
+    public static void main(String[] args){    
+        practica();
     }
-
-    
-
-   
-    
 }
